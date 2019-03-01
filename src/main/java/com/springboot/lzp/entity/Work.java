@@ -8,20 +8,23 @@ import javax.persistence.*;
  * @Date: 2019/1/2 16:16
  * @Description:
  */
-@Entity(name = "work")
-public class Work {
+@Entity
+@Table(name = "work")
+public class Work{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "WORK_ID")
-    private Integer workId;
+    private long workId;
     @Column(name = "WORK_NAME")
     private String workName;
+    @Column(name = "WORK_AGE")
+    private Long workAge;
 
-    public Integer getWorkId() {
+    public long getWorkId() {
         return workId;
     }
 
-    public void setWorkId(Integer workId) {
+    public void setWorkId(long workId) {
         this.workId = workId;
     }
 
@@ -31,5 +34,13 @@ public class Work {
 
     public void setWorkName(String workName) {
         this.workName = workName;
+    }
+
+    public Long getWorkAge() {
+        return workAge;
+    }
+
+    public void setWorkAge(Long workAge) {
+        this.workAge = workAge;
     }
 }

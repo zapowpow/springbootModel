@@ -1,11 +1,9 @@
 package com.springboot.lzp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @Author: lizhipeng
@@ -15,4 +13,5 @@ import java.util.List;
  */
 @NoRepositoryBean
 public interface BaseRepository<T,ID extends Serializable> extends JpaRepository<T,ID> {
+
 }

@@ -1,8 +1,7 @@
 package com.springboot.lzp.service.Impl;
 
-import com.springboot.lzp.entity.User;
 import com.springboot.lzp.entity.Work;
-import com.springboot.lzp.service.UserService;
+import com.springboot.lzp.service.WorkService;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,6 +11,6 @@ import org.springframework.stereotype.Service;
  * @Description:
  */
 @Service
-public class WorkImpl extends BaseImpl<Work,Integer> implements UserService{
+public class WorkImpl extends BaseImpl<Work,Long> implements WorkService {
 
 }

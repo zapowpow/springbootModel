@@ -11,6 +11,6 @@ import org.springframework.stereotype.Service;
  * @Description:
  */
 @Service
-public class UserImpl extends BaseImpl<User,Integer> implements UserService{
+public class UserImpl extends BaseImpl<User,Long> implements UserService{
 
 }

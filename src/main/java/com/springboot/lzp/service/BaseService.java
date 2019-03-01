@@ -12,8 +12,10 @@ import java.util.List;
  */
 
 public interface BaseService<T,ID>{
-    List<T> findBy(String columnName,Object value);
+    List findBy(String columnName,Object value);
 
     @Transactional
     void deleteBy(String columnName,Object value);
+
+    List findAll(Class clazz);
 }

@@ -1,5 +1,7 @@
 package com.springboot.lzp.service;
 
+import com.springboot.lzp.entity.User;
+
 /**
  * @Author: lizhipeng
  * @Company: 上海博般数据技术有限公司
@@ -7,6 +9,6 @@ package com.springboot.lzp.service;
  * @Description:
  */
 
-public interface UserService {
+public interface UserService extends BaseService<User,Long>{
 
 }

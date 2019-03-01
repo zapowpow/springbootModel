@@ -1,10 +1,10 @@
 package com.springboot.lzp.controller;
 
+import com.springboot.lzp.GetMethodAndProperty;
 import com.springboot.lzp.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -30,5 +30,10 @@ public class UserController extends BaseControllerImpl<User,Integer>{
         map.put("two", "asd");
         map.put("three", "123");
         return map;
+    }
+
+    @RequestMapping("come")
+    public String come() {
+        return GetMethodAndProperty.findId(User.class);
     }
 }

@@ -8,41 +8,28 @@ import javax.persistence.*;
  * @Date: 2018/10/29 10:12
  * @Description:
  */
-@Entity(name = "user")
+@Entity
 @Table(name = "user")
+@SecondaryTable(name = "b_user",pkJoinColumns = {@PrimaryKeyJoinColumn(name = "WORK_ID")})
 public class User {
-//
-//    public enum column{
-//        TABLE_NAME("user"),
-//        USER_ID("id"),
-//        USER_NAME("name"),
-//        USER_AGE("age");
-//        private String columnName;
-//
-//        column(String columnName) {
-//            this.columnName=columnName;
-//        }
-//
-//        public String getColumnName() {
-//            return columnName;
-//        }
-//    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID")
-    private Integer id;
+    private Long id;
     @Column(name = "USER_NAME")
     private String name;
+    @Column(table = "b_user",name = "USER_AGE")
+    private Integer age;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
-
+    @OneToMany
     public String getName() {
         return name;
     }
@@ -51,4 +38,11 @@ public class User {
         this.name = name;
     }
 
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 }

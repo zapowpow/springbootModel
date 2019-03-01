@@ -1,15 +1,12 @@
 package com.springboot.lzp.controller;
 
-import com.springboot.lzp.repository.BaseRepository;
-import com.springboot.lzp.service.Impl.BaseImpl;
+import com.springboot.lzp.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
-
-;
-
 
 /**
  * @Author: lizhipeng
@@ -18,52 +15,18 @@ import java.util.List;
  * @Description:
  */
 
-public class BaseControllerImpl<T,ID extends Serializable> extends BaseImpl<T,ID> {
+public class BaseControllerImpl<T,ID extends Serializable> {
+
     @Autowired
-    private BaseRepository<T,ID> baseRepository;
+    BaseService<T,ID> base;
 
-    @PostMapping("/save")
-    public T save(@RequestBody T t){
-        baseRepository.save(t);
-      return t;
-    }
-
-    @RequestMapping("/saveAll")
-    public List<T> saveAll(@RequestBody List<T> ts){
-        baseRepository.saveAll(ts);
-        return ts;
-    }
-
-    @RequestMapping("deleteById")
-    public void deleteById(ID id){
-        baseRepository.deleteById(id);
-    }
-
-    @RequestMapping("/deleteBy/{columnName}")
-    public void deleteBy(@PathVariable(name = "columnName") String columnName, @RequestParam(name = "value") Object value) {
-        super.deleteBy(columnName,value);
+    private Class findClass(){
+        return (Class) ((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 
     @RequestMapping("/findAll")
-    public List<T> findAll(){
-        List<T> ts= baseRepository.findAll();
-        return ts;
+    public List<?> FindAll(){
+        return (List<?>) base.findAll(findClass());
     }
 
-    @RequestMapping("/findById")
-    public T findById(ID id){
-        return  (T) baseRepository.findById(id);
-    }
-
-
-    @RequestMapping("/findAllById")
-    public List<T> findAllById(List<ID> ids){
-        List<T> ts= baseRepository.findAllById(ids);
-        return ts;
-    }
-
-    @RequestMapping("/findBy/{columnName}")
-    public List<T> findBy(@PathVariable(name = "columnName") String columnName, @RequestParam(name = "value") Object value) {
-       return super.findBy(columnName,value);
-    }
 }

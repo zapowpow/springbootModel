@@ -1,9 +1,8 @@
 package com.springboot.lzp.service.Impl;
 
-import com.springboot.lzp.repository.BaseRepository;
 import com.springboot.lzp.service.BaseService;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,30 +17,35 @@ import java.util.List;
  * @Date: 2018/10/29 10:47
  * @Description:
  */
+@Service
 public class BaseImpl<T,ID extends Serializable> implements BaseService<T,ID> {
-
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public List<T> findBy(String columnName, Object value) {
+    public List findBy(String columnName, Object value) {
         Type genType = getClass().getGenericSuperclass();
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
-        Class<T> entityClass =  (Class)params[0];
+        Class entityClass =  (Class)params[0];
         String className =entityClass.getSimpleName();
 
         String sql="select u from "+className+" u where u."+columnName+" = '"+ value+"'";
         Query query= (Query) entityManager.createQuery(sql);
-        List<T> list= query.getResultList();
-        entityManager.close();
-        return list;
+        return query.getResultList();
     }
+
+    @Override
+    public List findAll(Class clazz) {
+        javax.persistence.Query query = entityManager.createQuery("select n from " + clazz.getSimpleName() + " n");
+        return query.getResultList();
+    }
+
 
     @Override
     public void deleteBy(String columnName, Object value) {
         Type genType = getClass().getGenericSuperclass();
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
-        Class<T> entityClass =  (Class)params[0];
+        Class entityClass =  (Class)params[0];
         String className =entityClass.getSimpleName();
         String sql="delete from "+className+" u where u."+columnName+" = '"+ value+"'";
         Query query= (Query) entityManager.createQuery(sql);
