@@ -40,7 +40,6 @@ public class BaseImpl<T,ID extends Serializable> implements BaseService<T,ID> {
         return query.getResultList();
     }
 
-
     @Override
     public void deleteBy(String columnName, Object value) {
         Type genType = getClass().getGenericSuperclass();

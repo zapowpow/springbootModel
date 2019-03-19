@@ -17,8 +17,6 @@ public class Work{
     private long workId;
     @Column(name = "WORK_NAME")
     private String workName;
-    @Column(name = "WORK_AGE")
-    private Long workAge;
 
     public long getWorkId() {
         return workId;
@@ -34,13 +32,5 @@ public class Work{
 
     public void setWorkName(String workName) {
         this.workName = workName;
-    }
-
-    public Long getWorkAge() {
-        return workAge;
-    }
-
-    public void setWorkAge(Long workAge) {
-        this.workAge = workAge;
     }
 }

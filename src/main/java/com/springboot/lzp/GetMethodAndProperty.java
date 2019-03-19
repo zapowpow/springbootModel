@@ -31,15 +31,33 @@ public class GetMethodAndProperty {
 
 
     public static void main(String[] args) {
-        User user = new User();
-        user.setId((long)1);
-        user.setName("123");
-        List<User> list = new ArrayList<>();
-        list.add(user);
-        user.setId((long)2);
-        findId(User.class);
-        System.out.println("123");
+//        User user = new User();
+//        user.setId((long)1);
+//        user.setName("123");
+//        List<User> list = new ArrayList<>();
+//        list.add(user);
+//        user.setId((long)2);
+//        findId(User.class);
+//        System.out.println("123");
+//        GetMethodAndProperty.draft();
+        List<Integer> s= new ArrayList<>();
+        GetMethodAndProperty g = new GetMethodAndProperty();
+        List<Integer> p= g.find(1);
 
+    }
+
+    public static void draft(){
+
+    }
+
+    public <T>List<T> find(T tClass){
+        List<T> s = new ArrayList<>();
+        s.add(tClass);
+
+        List<? super Number> p = new ArrayList<>();
+        p.add(1);
+        p.add((long)6);
+        return s;
     }
 
 }

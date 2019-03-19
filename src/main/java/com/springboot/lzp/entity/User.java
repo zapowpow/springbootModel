@@ -1,6 +1,8 @@
 package com.springboot.lzp.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Author: lizhipeng
@@ -10,8 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "user")
-@SecondaryTable(name = "b_user",pkJoinColumns = {@PrimaryKeyJoinColumn(name = "WORK_ID")})
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +20,17 @@ public class User {
     private Long id;
     @Column(name = "USER_NAME")
     private String name;
-    @Column(table = "b_user",name = "USER_AGE")
+    @Column(name = "USER_AGE")
     private Integer age;
+
+    @OneToOne
+    @JoinColumn(name = "work_id",referencedColumnName = "user_id")
+    private Work work;
+
+    @OneToMany
+    @JoinColumn(name = "work_name",referencedColumnName = "user_name")
+    private List<Work> works;
+
 
     public Long getId() {
         return id;
@@ -29,7 +39,7 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
-    @OneToMany
+
     public String getName() {
         return name;
     }
@@ -44,5 +54,22 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+
+    public Work getWork() {
+        return work;
+    }
+
+    public void setWork(Work work) {
+        this.work = work;
+    }
+
+    public List<Work> getWorks() {
+        return works;
+    }
+
+    public void setWorks(List<Work> works) {
+        this.works = works;
     }
 }
