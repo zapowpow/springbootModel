@@ -7,8 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 
 /**
@@ -18,19 +21,26 @@ import java.util.Map;
  * @Description:
  */
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController extends BaseControllerImpl<User,Integer>{
 
-    Logger logger =  LoggerFactory.getLogger(User.class);
-    @RequestMapping("mapJson")
-    public Map mapJson() {
-        logger.info("asdd");
-        Map<String, Object> map = new HashMap<>();
-        map.put("one", 1);
-        map.put("two", "asd");
-        map.put("three", "123");
-        return map;
+    private Logger logger =  LoggerFactory.getLogger(User.class);
+    @RequestMapping("/get")
+    public void get(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        Cookie cookie1 = new Cookie("name","lzp");
+        Cookie cookie2 = new Cookie("password","123");
+        response.addCookie(cookie1);
     }
+
+    @RequestMapping("/set")
+    public Object set(HttpServletRequest request, HttpServletResponse response) {
+        Cookie[] cookies = request.getCookies();
+        for (int i=0;cookies!=null&&i<cookies.length;i++){
+            System.out.println(cookies[i].getName());
+        }
+        return null;
+    }
+
 
     @RequestMapping("come")
     public String come() {

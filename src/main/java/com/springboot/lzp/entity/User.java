@@ -13,7 +13,6 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID")
@@ -24,7 +23,7 @@ public class User implements Serializable {
     private Integer age;
 
     @OneToOne
-    @JoinColumn(name = "work_id",referencedColumnName = "user_id")
+    @JoinColumn(name = "work_id",referencedColumnName = "work_id")
     private Work work;
 
     @OneToMany

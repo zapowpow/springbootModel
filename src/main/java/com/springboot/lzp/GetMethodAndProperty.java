@@ -1,7 +1,5 @@
 package com.springboot.lzp;
 
-import com.springboot.lzp.entity.User;
-
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
@@ -15,7 +13,7 @@ import java.util.List;
  * @Description:
  */
 
-public class GetMethodAndProperty {
+public class GetMethodAndProperty{
 
     public static String findId(Class clazz){
         Field[] fields = clazz.getDeclaredFields();
@@ -43,7 +41,6 @@ public class GetMethodAndProperty {
         List<Integer> s= new ArrayList<>();
         GetMethodAndProperty g = new GetMethodAndProperty();
         List<Integer> p= g.find(1);
-
     }
 
     public static void draft(){
